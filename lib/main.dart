@@ -17,7 +17,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      theme: ref.watch(themeProvider).selectedTheme,
       home: const MyHomePage(),
     );
   }
@@ -28,16 +28,15 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Chance dark theme to light theme with riverpod'),
         ),
         body: Center(
           child: Switch(
-            value: ref.read(themeProvider).isSwitch ?? false,
+            value: ref.watch(themeProvider).isSwitchcontrol ?? false,
             onChanged: (value) {
-              ref.watch(themeProvider.notifier).changeSwicthwithTheme(value);
+              ref.watch(themeProvider.notifier).isswicth(value: value);
             },
           ),
         ));

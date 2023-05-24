@@ -5,35 +5,36 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ThemeNotifier extends StateNotifier<ThemeState> {
   ThemeNotifier() : super(ThemeState());
 
-  void changeTheme(bool check) {
-    if (!check) {
-      state = state.copyWith(themeData: ThemeData.light());
+  void isswicth({bool? value}) {
+    if (value != null) {
+      state = state.copyWith(isSwitchcontrol: value);
+      value
+          ? state = state.copyWith(selectedTheme: ThemeData.dark())
+          : state = state.copyWith(selectedTheme: ThemeData.light());
     } else {
-      state = state.copyWith(themeData: ThemeData.dark());
+      state = state.copyWith(isSwitchcontrol: false);
+      state = state.copyWith(selectedTheme: ThemeData.light());
     }
   }
 
-  void changeSwicthwithTheme(bool value) {
-    state = state.copyWith(isSwitch: value);
-  }
+  void chancingTheme() {}
 }
 
 class ThemeState {
-  ThemeData? themeData;
-  bool? isSwitch;
-
+  ThemeData? selectedTheme;
+  bool? isSwitchcontrol;
   ThemeState({
-    this.themeData,
-    this.isSwitch = false,
+    this.selectedTheme,
+    this.isSwitchcontrol,
   });
 
   ThemeState copyWith({
-    ThemeData? themeData,
-    bool? isSwitch,
+    ThemeData? selectedTheme,
+    bool? isSwitchcontrol,
   }) {
     return ThemeState(
-      themeData: themeData ?? this.themeData,
-      isSwitch: isSwitch ?? this.isSwitch,
+      selectedTheme: selectedTheme ?? this.selectedTheme,
+      isSwitchcontrol: isSwitchcontrol ?? this.isSwitchcontrol,
     );
   }
 }
